@@ -7,6 +7,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
+import { Cloudinary } from '@cloudinary/url-gen';
 import {
   updateUserStart,
   updateUserSuccess,
@@ -35,7 +36,12 @@ export default function Profile() {
   // allow write: if
   // request.resource.size < 2 * 1024 * 1024 &&
   // request.resource.contentType.matches('image/.*')
-
+  const cloudinary = new Cloudinary({
+    cloud_name: 'ddxfstlem', // Replace with your Cloudinary cloud name
+    api_key: '719161466118894', // Replace with your Cloudinary API key
+    api_secret: 'Qp9GRhDIUt6yVRmn3J4TRaL31RI', // Replace with your Cloudinary API secret
+  });
+  // ..
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
@@ -174,7 +180,7 @@ export default function Profile() {
         <img
           onClick={() => fileRef.current.click()}
           src={formData.avatar || currentUser.avatar}
-          alt='profile'
+          alt='avatar'
           className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
         />
         <p className='text-sm self-center'>
